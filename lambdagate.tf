@@ -2,6 +2,29 @@ provider "aws" {
    region = "us-east-1"
 }
 
+
+resource "aws_dynamodb_table" "basic-dynamodb-table" {
+  name           = "air_conditions"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 20
+  write_capacity = 20
+  hash_key       = "eventDateTime"
+  range_key      = "air_station"
+
+  attribute {
+    name = "eventDateTime"
+    type = "S"
+  }
+
+  attribute {
+    name = "air_station"
+    type = "S"
+  }
+
+
+}
+
+
 resource "aws_lambda_function" "myLambda" {
    function_name = "firstFunction"
 
